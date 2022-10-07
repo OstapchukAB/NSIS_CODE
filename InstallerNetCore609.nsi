@@ -27,21 +27,21 @@ Section
 	SetOutPath "$TEMP\"
 	File   "TMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
 	Exec   "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
-	Delete "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
-	;Goto lbl_install_myApp
-	false:
-	;MessageBox MB_ICONINFORMATION "QUIT"
-	
-	;lbl_install_myApp:
-
-	SetOverwrite on
-	SetOutPath "C:\MyApplication\"
-	File "MyApplication\WinFormTest.dll"
-	File "MyApplication\WinFormTest.exe"
-	File "MyApplication\WinFormTest.deps.json"
-	File "MyApplication\WinFormTest.runtimeconfig.json"
-	File "MyApplication\WinFormTest.pdb"
-	Exec "C:\MyApplication\WinFormTest.exe"
+;	Delete "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
+;	;Goto lbl_install_myApp
+;	false:
+;	;MessageBox MB_ICONINFORMATION "QUIT"
+;	
+;	;lbl_install_myApp:
+;
+;	SetOverwrite on
+;	SetOutPath "C:\MyApplication\"
+;	File "MyApplication\WinFormTest.dll"
+;	File "MyApplication\WinFormTest.exe"
+;	File "MyApplication\WinFormTest.deps.json"
+;	File "MyApplication\WinFormTest.runtimeconfig.json"
+;	File "MyApplication\WinFormTest.pdb"
+;	Exec "C:\MyApplication\WinFormTest.exe"
 	Quit
 SectionEnd
 	
