@@ -26,8 +26,8 @@ Section
 	SetOverwrite on
 	SetOutPath "$TEMP\"
 	File   "TMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
-	Exec   "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
-;	Delete "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
+	ExecWait   "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
+	Delete "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
  Goto lbl_install_myApp
 	false:
   MessageBox MB_ICONINFORMATION "QUIT"
@@ -37,7 +37,8 @@ Section
 	SetOverwrite on
 	SetOutPath "$TEMP\"
   File   "myapp.exe"
-	Exec   "$TEMP\myapp.exe"
+	ExecWait   "$TEMP\myapp.exe"
+	Delete "$TEMP\myapp.exe"
 	Quit
 SectionEnd
 	
