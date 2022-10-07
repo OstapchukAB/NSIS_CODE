@@ -5,7 +5,7 @@
 Name "${APPNAMEANDVERSION}"
 
 RequestExecutionLevel user
-OutFile "Installer_Runtime_NetCore609.exe"
+OutFile "Installer_MyApp_with_Runtime_NetCore609.exe"
 !define NetCore6 $8
 !define InstalNetCore $9
 
@@ -17,7 +17,7 @@ Section
 
 	Call CheckNetcore
 	StrCmp ${InstalNetCore} "false" 0 lbl_install_NetCore
-	Quit
+	Goto lbl_install_myApp
 	
 	lbl_install_NetCore:
 	MessageBox MB_YESNO "Install .NetCore 6.0.9?" IDYES true IDNO false
@@ -28,20 +28,16 @@ Section
 	File   "TMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
 	Exec   "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
 ;	Delete "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
-;	;Goto lbl_install_myApp
-;	false:
-;	;MessageBox MB_ICONINFORMATION "QUIT"
-;	
-;	;lbl_install_myApp:
-;
-;	SetOverwrite on
-;	SetOutPath "C:\MyApplication\"
-;	File "MyApplication\WinFormTest.dll"
-;	File "MyApplication\WinFormTest.exe"
-;	File "MyApplication\WinFormTest.deps.json"
-;	File "MyApplication\WinFormTest.runtimeconfig.json"
-;	File "MyApplication\WinFormTest.pdb"
-;	Exec "C:\MyApplication\WinFormTest.exe"
+ Goto lbl_install_myApp
+	false:
+  MessageBox MB_ICONINFORMATION "QUIT"
+
+	
+ lbl_install_myApp:
+	SetOverwrite on
+	SetOutPath "$TEMP\"
+  File   "myapp.exe"
+	Exec   "$TEMP\myapp.exe"
 	Quit
 SectionEnd
 	
