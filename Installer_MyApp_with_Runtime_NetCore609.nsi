@@ -1,10 +1,10 @@
 !define APPNAME "Runtime .NetCore"
 !define APPNAMEANDVERSION "Runtime .NetCore 6.0.9"
-
+;RequestExecutionLevel user
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
 
-RequestExecutionLevel user
+
 OutFile "Installer_MyApp_with_Runtime_NetCore609.exe"
 !define NetCore6 $8
 !define InstalNetCore $9
@@ -16,33 +16,39 @@ Section
 	StrCpy ${InstalNetCore} "false"
 
 	Call CheckNetcore
-	StrCmp ${InstalNetCore} "false" 0 lbl_install_NetCore
-	Goto lbl_install_myApp
 	
-	lbl_install_NetCore:
+	StrCmp ${InstalNetCore} "false" 0 lbl_install_netCore
+		;MessageBox MB_ICONINFORMATION "${InstalNetCore}"
+		Call InstallMyApp
+		Quit
+	
+	lbl_install_netCore:
 	MessageBox MB_YESNO "Install .NetCore 6.0.9?" IDYES true IDNO false
+	
 	true:
-	;MessageBox MB_ICONINFORMATION "INSTALL"
 	SetOverwrite on
 	SetOutPath "$TEMP\"
 	File   "TMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
 	ExecWait   "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
 	Delete "$TEMP\windowsdesktop-runtime-6.0.9-win-x64.exe"
- Goto lbl_install_myApp
+  Call InstallMyApp
+		Quit
+	
 	false:
   MessageBox MB_ICONINFORMATION "QUIT"
+  Call InstallMyApp
+		Quit
+SectionEnd
 
 	
- lbl_install_myApp:
-	SetOverwrite on
-	SetOutPath "$TEMP\"
-  File   "myapp.exe"
-	ExecWait   "$TEMP\myapp.exe"
-	Delete "$TEMP\myapp.exe"
-	Quit
-SectionEnd
-	
-	
+Function InstallMyApp
+		SetOverwrite on
+		SetOutPath "$TEMP\"
+		File   "myapp.exe"
+		ExecWait   "$TEMP\myapp.exe"
+		Delete "$TEMP\myapp.exe"
+		Return
+	FunctionEnd
 	
 Function CheckNetcore
 	SetRegView 64
